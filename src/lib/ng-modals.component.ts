@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnChanges, Input, Output, EventEmitter, ViewChild, ComponentFactoryResolver, Directive, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnChanges, Input, Output, EventEmitter, ViewChild, ComponentFactoryResolver, Directive, ViewContainerRef, TemplateRef, ElementRef, HostListener } from '@angular/core';
 import { NgModalsInterface } from './interface/ng-modals.interface';
 
 
@@ -12,8 +12,8 @@ export class NgModalsDirective {
 @Component({
   selector: 'ng-modals',
   template: `
-    <div class="mainWrapper" *ngIf="condition" id="mainWrapper" (click)="closeModal()">
-      <div class="modalContainer" id="modelContainer">
+    <div class="mainWrapper" *ngIf="condition" id="mainWrapper">
+      <div class="modalContainer" id="modelContainer" #container>
         <ng-template ngmodals></ng-template>
       </div>
     </div>
@@ -53,10 +53,21 @@ export class NgModalsComponent implements OnInit, AfterViewInit, OnChanges {
   public css = {};
   public viewIsInit = false;
   @ViewChild(NgModalsDirective) modalDirective:NgModalsDirective;
+  @ViewChild('container') container:TemplateRef<any>;
+  public initialClick = false;
 
+  @HostListener('document:click', ['$event.target']) onclick(targetElement){
+    if(this.initialClick){
+      const clickedInside = document.getElementById("modelContainer").contains(targetElement);
+      if(!clickedInside){
+        this.closeModal();
+      }
+    }
+  }
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
+    
   }
 
   ngOnChanges(){
@@ -87,10 +98,12 @@ export class NgModalsComponent implements OnInit, AfterViewInit, OnChanges {
       let component = container.createComponent(factory);
       (<NgModalsInterface>component.instance).data = this.options.data;
       document.getElementById("mainWrapper").style.opacity = "1";
+      this.initialClick = true;
     }
   }
 
   closeModal(){
+    this.initialClick = false;
     document.getElementById("mainWrapper").style.opacity = "0";
     setTimeout(() => {
       this.close.emit();
