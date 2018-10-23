@@ -1,0 +1,21 @@
+{
+  "name": "ng-modals",
+  "version": "0.0.6",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  },
+  "description":"Make a modal in angular extremely easily with ng-modals. Installation to have a modal pop up is quick and easy.",
+  "keywords":[
+    "Angular",
+    "Modal",
+    "Pop-up",
+    "Pop up",
+    "Angular 2",
+    "Angular 4",
+    "Angular 6",
+    "Modals"
+  ],
+  "author":"Riley Worthen",
+  "license":"ISC"
+}
