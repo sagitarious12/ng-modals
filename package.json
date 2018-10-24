@@ -1,6 +1,6 @@
 {
   "name": "ng-modals",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
@@ -17,5 +17,9 @@
     "Modals"
   ],
   "author":"Riley Worthen",
-  "license":"ISC"
+  "license":"ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sagitarious12/ng-modals.git"
+  }
 }
